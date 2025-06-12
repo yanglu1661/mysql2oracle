@@ -53,8 +53,13 @@ for filename in sorted(os.listdir(ddl_dir)):
     with open(file_path, 'r') as f:
         sql_content = f.read()
 
+    # 去除以 -- 开头的注释行
+    cleaned_sql = '\n'.join(
+        line for line in sql_content.splitlines() if not line.strip().startswith('--')
+    )
+
     # 按分号拆分 SQL 语句，逐条执行
-    statements = [stmt.strip() for stmt in sql_content.split(';') if stmt.strip()]
+    statements = [stmt.strip() for stmt in cleaned_sql.split(';') if stmt.strip()]
     for idx, stmt in enumerate(statements, 1):
         try:
             cursor.execute(stmt)
@@ -62,7 +67,6 @@ for filename in sorted(os.listdir(ddl_dir)):
             print(f"❌ 第 {idx} 条 SQL 执行失败 in {filename}:")
             print("   SQL 片段：", stmt[:120].replace('\n', ' '))
             print("   错误信息：", e)
-
 
 # 提交并关闭连接
 conn.commit()
