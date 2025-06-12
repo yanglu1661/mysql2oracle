@@ -1,0 +1,52 @@
+########################################################
+#前置条件
+########################################################
+OS要求： Oracle Linux/Redhat 9
+
+1）安装python包
+sudo pip3 install openai
+sudo pip3 install pymysql
+
+2）安装datax
+#下载
+wget https://datax-opensource.oss-cn-hangzhou.aliyuncs.com/202309/datax.tar.gz
+#解压
+tar -xvzf datax.tar.gz
+
+指定datax_home为datax解压的目录绝对路径
+
+[datax]
+datax_home=/home/opc/datax
+
+########################################################
+#脚本说明
+########################################################
+1）
+mysql_ddl_export.py：
+导出mysql的所有TABLE/VIEW，并转换为OracleDB格式
+导出mysql DDL目录为： input_dir = mysql_schema_raw
+转换后的   DDL目录为： output_dir = oracle_schema_ddl
+
+[ddl_output]
+#the source database ddl exported directory
+input_dir = mysql_schema_raw
+#the converted dest ddl
+output_dir = oracle_schema_ddl
+
+2）
+mysql2jobs.py:
+输出datax需要同步所有jobs.json文件
+
+输出的目录为： datax_jobs_dir=datax_jobs
+
+[datax]
+datax_jobs_dir=datax_jobs
+
+3）datax_multithread_run.py：
+并发运行所有同步任务，从而从源把数据同步到目标。一个jobs.json文件，同步一张表。
+
+每张表的同步日志，输出在 datax_logs_dir=datax_logs 目录下
+[datax]
+datax_jobs_dir=datax_jobs
+datax_logs_dir=datax_logs
+

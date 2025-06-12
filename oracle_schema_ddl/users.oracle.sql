@@ -1,0 +1,9 @@
+CREATE TABLE users (
+  user_id NUMBER GENERATED ALWAYS AS IDENTITY,
+  username VARCHAR2(50) NOT NULL,
+  email VARCHAR2(100) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (user_id),
+  UNIQUE (username),
+  UNIQUE (email)
+);

@@ -1,0 +1,57 @@
+{
+    "job": {
+        "content": [
+            {
+                "reader": {
+                    "name": "mysqlreader",
+                    "parameter": {
+                        "username": "dbusr",
+                        "password": "Oracle123456!",
+                        "column": [
+                            "user_id",
+                            "username",
+                            "email",
+                            "created_at"
+                        ],
+                        "connection": [
+                            {
+                                "jdbcUrl": [
+                                    "jdbc:mysql://10.0.0.83:3306/db1?useSSL=false"
+                                ],
+                                "table": [
+                                    "users"
+                                ]
+                            }
+                        ]
+                    }
+                },
+                "writer": {
+                    "name": "oraclewriter",
+                    "parameter": {
+                        "username": "db1",
+                        "password": "welcome1",
+                        "column": [
+                            "user_id",
+                            "username",
+                            "email",
+                            "created_at"
+                        ],
+                        "connection": [
+                            {
+                                "jdbcUrl": "jdbc:oracle:thin:@10.0.0.142:1521/orclpdb1",
+                                "table": [
+                                    "users"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            }
+        ],
+        "setting": {
+            "speed": {
+                "channel": 5
+            }
+        }
+    }
+}
