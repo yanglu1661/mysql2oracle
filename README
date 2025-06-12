@@ -27,6 +27,14 @@ mysql_ddl_export.py：
 导出mysql DDL目录为： input_dir = mysql_schema_raw
 转换后的   DDL目录为： output_dir = oracle_schema_ddl
 
+针对每一张表，如果有外键的话，会输出两个sql文件。外键的定义单独放一个文件。
+因为外键提前创建，会导入有主外键关系的表导入，因为导入数据顺序，出现问题。
+如此，可以数据导入完成后再创建外键关系。
+
+如下是user_roles表的示例：
+user_roles.foreign_keys.sql  user_roles.oracle.sql
+
+
 [ddl_output]
 #the source database ddl exported directory
 input_dir = mysql_schema_raw
