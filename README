@@ -6,6 +6,7 @@ OS要求： Oracle Linux/Redhat 9
 1）安装python包
 sudo pip3 install openai
 sudo pip3 install pymysql
+sudo pip3 install oracledb
 
 2）安装datax
 #下载
@@ -57,4 +58,12 @@ datax_jobs_dir=datax_jobs
 [datax]
 datax_jobs_dir=datax_jobs
 datax_logs_dir=datax_logs
+
+4) oracle_ddl_import.py:
+连接OracleDB，并导入所有表结构。
+对于foreign_key的导入，请在数据同步完成后，再导入
+
+使用示例：
+usage: oracle_ddl_import.py [-h] (--ddl | --foreign-keys)
+oracle_ddl_import.py: error: one of the arguments --ddl --foreign-keys is required
 
